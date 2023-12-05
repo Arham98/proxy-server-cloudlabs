@@ -16,6 +16,7 @@ const PORT = 3000;
 
 // Function to make a simple proxy API call
 const makeApiCall = async (url, options) => {
+  console.log(url, JSON.stringify(options));
   try {;
     const response = await fetch(url, options);
     return response;
@@ -48,7 +49,7 @@ const getOptions = async (reqMethod, reqHeaders, reqBody) => {
     return {
       method: reqMethod,
       headers: {
-        "Content-Type": reqHeaders.get("Content-Type"),
+        "Content-Type": "application/json",
       },
       body: reqBody
     }
@@ -56,7 +57,7 @@ const getOptions = async (reqMethod, reqHeaders, reqBody) => {
     return {
       method: reqMethod,
       headers: {
-        "Content-Type": reqHeaders.get("Content-Type"),
+        "Content-Type": "application/json",
       }
     };
   }
@@ -65,9 +66,10 @@ const getOptions = async (reqMethod, reqHeaders, reqBody) => {
 // Extract URL
 const getURl = async (completeUrl) => {
   const start_index = completeUrl.indexOf('/proxy/')+7;
+  const urlLength = completeUrl.length;
   const end_index = completeUrl.indexOf('?');
-  const url = completeUrl.substring(start_index, end_index);
-  console.log('url', url);
+  const url = (end_index !== -1) ? completeUrl.substring(start_index, end_index) : completeUrl.substring(start_index, urlLength);
+  return url;
 };
 
 // Function to proxy React calls to node server
