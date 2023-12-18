@@ -107,4 +107,4 @@ dist
 .DS_Store
 package-lock.json
 keys.*
-tmp.*
+tmp*.*
