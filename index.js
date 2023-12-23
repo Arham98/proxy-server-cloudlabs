@@ -16,7 +16,6 @@ const PORT = 3000;
 
 // Function to make a simple proxy API call
 const makeApiCall = async (url, options) => {
-  console.log(url, JSON.stringify(options));
   try {;
     const response = await fetch(url, options);
     return response;
